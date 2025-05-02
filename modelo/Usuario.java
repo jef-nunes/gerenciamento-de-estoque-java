@@ -13,7 +13,8 @@ public class Usuario {
     private int usuarioID;
     // Email de login
     private String email;
-    // Senha de login (hash)
+    // Senha de login (hash SHA256)
+    // ou seja uma string de 64 caracteres
     private String senha;
     
     public int getUsuarioID() {
