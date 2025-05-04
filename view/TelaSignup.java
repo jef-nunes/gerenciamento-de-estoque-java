@@ -152,6 +152,7 @@ public class TelaSignup extends javax.swing.JFrame {
 
     private void btSignupCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignupCancelarActionPerformed
         // TODO add your handling code here:
+        GerenciaTelas.definirTelaAtual("login");
     }//GEN-LAST:event_btSignupCancelarActionPerformed
 
     /**

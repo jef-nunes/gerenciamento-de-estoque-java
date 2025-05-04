@@ -20,8 +20,7 @@ import java.sql.SQLException;
 public class SchemaDAO {
     // Criar o banco se não existir
     private static void criarBanco(){
-        System.out.println("Preparando criação do banco de dados");
-        System.out.println("Criando conexão ao MySQL...");
+        System.out.println("Criando um novo banco de dados");
         try (Connection con = ConexaoMySQL.conectarSemBanco()) {
             // Query
             String sql = "CREATE SCHEMA IF NOT EXISTS "+ConexaoMySQL.NOME_BANCO+";";
@@ -34,6 +33,7 @@ public class SchemaDAO {
     }
     // Apagar o banco
     private static void apagarBanco(){
+        System.out.println("Apagando o banco de dados");
         try (Connection con = ConexaoMySQL.conectarSemBanco()) {
             // Query
             String sql = "DROP SCHEMA "+ConexaoMySQL.NOME_BANCO+";";

@@ -13,13 +13,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Usuario;
+import view.TelaLogin;
+import view.TelaSignup;
+import view.GerenciaTelas;
 
 /**
  *
  * @author jefadmin
  */
 public class Principal {
-    
     // Acesso ao MySQL em ambiente de desenvolvimento
     private static void acessoMySQLDev(){
         try {
@@ -42,8 +44,6 @@ public class Principal {
             usuario.exibirDados();
         }
     }
-    
-
 
     public static void main(String[] args) {
         // Se o argumento --dev for passado
@@ -52,7 +52,7 @@ public class Principal {
         for(String arg:args){
             // Se em ambiente de desenvolvimento
             if(arg.equalsIgnoreCase("--dev")){
-                System.out.println("Is Dev!");
+                System.out.println("[Ambiente de Desenvolvimento]");
                 Variaveis.setDev(true);
                 // Prepara acesso ao MySQL
                 // em abiente de desenvolvimento
@@ -66,5 +66,6 @@ public class Principal {
         if(Variaveis.isDev()){
             testes();
         }
+        GerenciaTelas.iniciar();
     }
 }

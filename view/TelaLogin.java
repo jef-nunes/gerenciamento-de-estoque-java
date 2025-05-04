@@ -3,13 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
 /**
  *
  * @author jefadmin
  */
 public class TelaLogin extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaLogin
      */
@@ -84,30 +82,29 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(jLabel5)
+                                .addGap(44, 44, 44))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(btLoginEnviar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3))
-                                    .addGap(30, 30, 30)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(inpLoginSenha)
-                                        .addComponent(inpLoginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(56, 56, 56)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(44, 44, 44))
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(inpLoginSenha)
+                                    .addComponent(inpLoginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(btLoginEnviar))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(btLoginSignup)))
                 .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btLoginSignup)
-                .addGap(129, 129, 129))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,9 +126,9 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(jLabel3))))
                 .addGap(37, 37, 37)
                 .addComponent(btLoginEnviar)
-                .addGap(49, 49, 49)
+                .addGap(43, 43, 43)
                 .addComponent(btLoginSignup)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18))
         );
@@ -141,6 +138,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btLoginSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginSignupActionPerformed
         // TODO add your handling code here:
+        GerenciaTelas.definirTelaAtual("signup");
     }//GEN-LAST:event_btLoginSignupActionPerformed
 
     private void btLoginEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginEnviarActionPerformed
