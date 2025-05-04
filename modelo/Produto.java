@@ -13,7 +13,7 @@ public class Produto {
     private int produtoID;
     // ID da categoria do produto (chave estrangeira)
     private int categoriaID;
-    // ID do usuario que registrou o produto
+    // ID do usuario que registrou o produto (chave estrangeira)
     private int usuarioID;
     // Nome
     private String nome;

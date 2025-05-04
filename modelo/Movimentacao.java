@@ -18,7 +18,7 @@ public class Movimentacao {
     private int movimentacaoID;
     // ID do produto (chave estrangeira)
     private int produtoID;
-    // ID do usuario que realizou a movimentação
+    // ID do usuario que realizou a movimentação (chave estrangeira)
     private int usuarioID;
     // Indica se o fluxo é de entrada ou saída
     private String tipoFluxo;
