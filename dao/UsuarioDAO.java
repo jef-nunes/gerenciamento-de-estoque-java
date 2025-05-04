@@ -17,7 +17,39 @@ import java.sql.SQLException;
  * @author jefadmin
  */
 public class UsuarioDAO {
-    private static final ArrayList<Usuario> usuarios = new ArrayList();
+    
+    // Autenticar um usuario
+    public boolean autenticar(String email, String senha) {
+        String sql = "SELECT 1 FROM usuario WHERE email = ? AND senha = ? LIMIT 1";
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // true se encontrou um usuário com email e senha
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
+    // Verificar se um email de login
+    // já está registrado no banco de dados
+    public boolean emailRegistrado(String email) {
+        String sql = "SELECT 1 FROM usuario WHERE email = ? LIMIT 1";
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            // Retorna true se encontrou algum registro
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Em caso de erro, retorna falso por segurança
+            return false;
+        }
+    }
     
     public void inserir(Usuario usuario){
         String sql = "INSERT INTO usuario(email, senha, nome)"+

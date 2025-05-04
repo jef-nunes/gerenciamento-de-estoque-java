@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jefadmin
@@ -36,10 +38,12 @@ public class TelaSignup extends javax.swing.JFrame {
         btSignupRegistrar = new javax.swing.JButton();
         btSignupCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        inpSignupNome = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Informe o seu email");
+        jLabel1.setText("O seu nome real");
 
         jLabel2.setText("Crie uma senha forte");
 
@@ -80,6 +84,14 @@ public class TelaSignup extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Controle de Estoque");
 
+        inpSignupNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpSignupNomeActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("O seu email");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,34 +105,37 @@ public class TelaSignup extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(inpSignupSenha1)
                         .addComponent(inpSignupSenha2)
-                        .addComponent(inpSignupEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inpSignupEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inpSignupNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btSignupCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btSignupRegistrar)))
                 .addGap(68, 68, 68))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inpSignupEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
+                .addComponent(jLabel5)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addGap(7, 7, 7)
+                .addComponent(inpSignupNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(inpSignupEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inpSignupSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,7 +147,7 @@ public class TelaSignup extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSignupCancelar)
                     .addComponent(btSignupRegistrar))
-                .addGap(34, 34, 34))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,15 +160,56 @@ public class TelaSignup extends javax.swing.JFrame {
     private void inpSignupEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpSignupEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inpSignupEmailActionPerformed
-
+    
+    // Botão para tentar um cadastro com as informações
+    // preenchidas pelo usuário
     private void btSignupRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignupRegistrarActionPerformed
         // TODO add your handling code here:
+        String nome = inpSignupNome.getText();
+        String email = inpSignupEmail.getText();
+        String senha1 = new String(inpSignupSenha1.getPassword());
+        String senha2 = new String(inpSignupSenha2.getPassword());
+        String[] inputs = {nome,email,senha1,senha2};
+        boolean erro = false;
+        // Verificar se algum campo não foi preenchido
+        for(int i=0; i<inputs.length; i++){
+            if(inputs[i].isEmpty()){
+                JOptionPane.showMessageDialog(null, "Erro - Preencha todos os campos.");
+                erro = true;
+                break;
+            }
+        }
+        // Verificar se o email fornecido já existe no banco de dados
+        if(GerenciaTelas.usuarioControle.emailRegistrado(email)){
+            JOptionPane.showMessageDialog(null, "Erro - Este email já foi registrado.");
+            erro = true;
+        }
+        // Verificar se as senhas correspondem
+        if(senha1.equals(senha2)==false){
+            JOptionPane.showMessageDialog(null, "Erro - As senhas não correspondem.");
+            erro = true;
+        }
+        // Se nenhum erro encontrado, prosseguir com o cadastro
+        if(!erro){
+            try{
+                GerenciaTelas.usuarioControle.cadastrar(email, senha2, nome);
+                JOptionPane.showMessageDialog(null, "Conta registrada com sucesso!");
+                GerenciaTelas.definirTelaAtual("login");
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro ao registrar conta.");
+            }
+        }
     }//GEN-LAST:event_btSignupRegistrarActionPerformed
 
     private void btSignupCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignupCancelarActionPerformed
         // TODO add your handling code here:
         GerenciaTelas.definirTelaAtual("login");
     }//GEN-LAST:event_btSignupCancelarActionPerformed
+
+    private void inpSignupNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpSignupNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpSignupNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,6 +250,7 @@ public class TelaSignup extends javax.swing.JFrame {
     private javax.swing.JButton btSignupCancelar;
     private javax.swing.JButton btSignupRegistrar;
     private javax.swing.JTextField inpSignupEmail;
+    private javax.swing.JTextField inpSignupNome;
     private javax.swing.JPasswordField inpSignupSenha1;
     private javax.swing.JPasswordField inpSignupSenha2;
     private javax.swing.JLabel jLabel1;
@@ -201,5 +258,6 @@ public class TelaSignup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

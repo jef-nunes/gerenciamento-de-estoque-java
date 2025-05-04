@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jefadmin
@@ -143,6 +146,22 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btLoginEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginEnviarActionPerformed
         // TODO add your handling code here:
+        String email = inpLoginEmail.getText().trim();
+        String senha = new String(inpLoginSenha.getPassword());
+        if(email.isEmpty() || senha.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Erro - Preencha todos os campos.");
+        }
+        else{
+            String hash = GerenciaTelas.usuarioControle.criptografarSenha(senha);
+            boolean autenticar = GerenciaTelas.usuarioControle.autenticar(email,hash);
+            if(!autenticar){
+               JOptionPane.showMessageDialog(null, "Erro - Credenciais de acesso inválidas.");
+            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Bem vindo!");  
+            }
+            
+        }
     }//GEN-LAST:event_btLoginEnviarActionPerformed
 
     private void inpLoginEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpLoginEmailActionPerformed

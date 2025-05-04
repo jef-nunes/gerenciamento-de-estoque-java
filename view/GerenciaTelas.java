@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view;
-
+import controle.UsuarioControle;
 /**
  *
  * @author jefadmin
  */
 public class GerenciaTelas {
+    public static UsuarioControle usuarioControle = new UsuarioControle();
     private static TelaLogin telaLogin;
     private static TelaSignup telaSignup;
     // Renderiza apenas a tela especificada

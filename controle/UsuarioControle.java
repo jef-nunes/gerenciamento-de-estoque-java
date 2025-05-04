@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HexFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.HexFormat;
 public class UsuarioControle {
     private UsuarioDAO dao = new UsuarioDAO();
     
-    private String criptografarSenha(String input){
+    public String criptografarSenha(String input){
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(input.getBytes(StandardCharsets.UTF_8));
@@ -33,6 +34,14 @@ public class UsuarioControle {
         String senhaCripto = criptografarSenha(senha);
         Usuario u = new Usuario(-1,email,senhaCripto,nome);
         dao.inserir(u);
+    }
+    
+    public boolean emailRegistrado(String email){
+        return dao.emailRegistrado(email);
+    }
+    
+    public boolean autenticar(String email, String senha){
+        return dao.autenticar(email,senha);
     }
     
     public ArrayList<Usuario> listar(){
