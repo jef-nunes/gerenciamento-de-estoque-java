@@ -22,6 +22,15 @@ public class Produto {
     // Quantidade disponivel
     private int quantidadeDisponivel;
 
+    public Produto(int produtoID, int categoriaID, int usuarioID, String nome, float valorUnidade, int quantidadeDisponivel) {
+        this.produtoID = produtoID;
+        this.categoriaID = categoriaID;
+        this.usuarioID = usuarioID;
+        this.nome = nome;
+        this.valorUnidade = valorUnidade;
+        this.quantidadeDisponivel = quantidadeDisponivel;
+    }
+
     public int getProdutoID() {
         return produtoID;
     }
@@ -68,9 +77,5 @@ public class Produto {
 
     public void setQuantidadeDisponivel(int quantidadeDisponivel) {
         this.quantidadeDisponivel = quantidadeDisponivel;
-    }
-
-    public Produto(int produtoID) {
-        this.produtoID = produtoID;
     }
 }

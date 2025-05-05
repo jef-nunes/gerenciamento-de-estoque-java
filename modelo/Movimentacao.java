@@ -25,9 +25,10 @@ public class Movimentacao {
     // Quantidade de produtos que foram movimentados
     private int quantidade;
 
-    public Movimentacao(int movimentacaoID, int produtoID, String tipoFluxo, int quantidade) {
+    public Movimentacao(int movimentacaoID, int produtoID, int usuarioID, String tipoFluxo, int quantidade) {
         this.movimentacaoID = movimentacaoID;
         this.produtoID = produtoID;
+        this.usuarioID = usuarioID;
         this.tipoFluxo = tipoFluxo;
         this.quantidade = quantidade;
     }

@@ -59,10 +59,10 @@ public class Principal {
                 acessoMySQLDev();
             }
         }
-        // Prepara o DAO do banco de dados
+        // Prepara o banco de dados
         SchemaDAO.iniciar();
         
-        // Testes em desenvolvimento
+        // Testes em ambiente de desenvolvimento
         if(Variaveis.isDev()){
             testes();
         }

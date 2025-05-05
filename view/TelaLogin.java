@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JOptionPane;
+import principal.Principal;
 
 /**
  *
@@ -158,7 +159,8 @@ public class TelaLogin extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Erro - Credenciais de acesso inválidas.");
             }
             else{
-                 JOptionPane.showMessageDialog(null, "Bem vindo!");  
+                 JOptionPane.showMessageDialog(null, "Bem vindo!");
+                 GerenciaTelas.definirTelaAtual("estoque");
             }
             
         }

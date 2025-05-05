@@ -8,30 +8,30 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema estoque_db
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema estoque_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `estoque_db` DEFAULT CHARACTER SET utf8 ;
+USE `estoque_db` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`categoria`
+-- Table `estoque_db`.`categoria`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`categoria` (
-  `categoria_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `estoque_db`.`categoria` (
+  `categoria_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`categoria_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `estoque_db`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
-  `usuario_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `estoque_db`.`usuario` (
+  `usuario_id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
   `senha` CHAR(64) NOT NULL,
   `nome` VARCHAR(255) NOT NULL,
@@ -40,10 +40,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`produto`
+-- Table `estoque_db`.`produto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`produto` (
-  `produto_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `estoque_db`.`produto` (
+  `produto_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `valor_unidade` FLOAT NOT NULL,
   `quantidade_disponivel` INT NOT NULL,
@@ -54,22 +54,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`produto` (
   INDEX `fk_produto_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_produto_categoria1`
     FOREIGN KEY (`categoria_id`)
-    REFERENCES `mydb`.`categoria` (`categoria_id`)
+    REFERENCES `estoque_db`.`categoria` (`categoria_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_produto_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`usuario_id`)
+    REFERENCES `estoque_db`.`usuario` (`usuario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`movimentacao`
+-- Table `estoque_db`.`movimentacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`movimentacao` (
-  `movimentacao_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `estoque_db`.`movimentacao` (
+  `movimentacao_id` INT NOT NULL AUTO_INCREMENT,
   `tipo_fluxo` VARCHAR(255) NOT NULL,
   `quantidade` INT NOT NULL,
   `usuario_id` INT NOT NULL,
@@ -79,12 +79,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`movimentacao` (
   INDEX `fk_movimentacao_produto1_idx` (`produto_id` ASC) VISIBLE,
   CONSTRAINT `fk_movimentacao_usuario`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`usuario_id`)
+    REFERENCES `estoque_db`.`usuario` (`usuario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_movimentacao_produto1`
     FOREIGN KEY (`produto_id`)
-    REFERENCES `mydb`.`produto` (`produto_id`)
+    REFERENCES `estoque_db`.`produto` (`produto_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
