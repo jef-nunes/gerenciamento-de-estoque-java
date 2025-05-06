@@ -87,6 +87,8 @@ public class TelaEstoque extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         inpEstoqueBuscar = new javax.swing.JTextField();
         btEstoqueBuscar = new javax.swing.JButton();
+        inpEstoqueCategoria = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +107,11 @@ public class TelaEstoque extends javax.swing.JFrame {
                 "Nome", "Valor Uni.", "Qnt. Disponível", "Responsável"
             }
         ));
+        tabEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabEstoqueMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabEstoque);
 
         inpEstoqueNomeProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -115,9 +122,9 @@ public class TelaEstoque extends javax.swing.JFrame {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Qnt. Disponível");
+        jLabel2.setText("Quant. disponível");
 
-        jLabel3.setText("Valor Uni.");
+        jLabel3.setText("Preço");
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel5.setText("Gerenciar");
@@ -139,6 +146,11 @@ public class TelaEstoque extends javax.swing.JFrame {
         });
 
         btEstoqueAtualizarProduto.setText("Atualizar");
+        btEstoqueAtualizarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEstoqueAtualizarProdutoActionPerformed(evt);
+            }
+        });
 
         btEstoqueRemoverProduto.setText("Remover");
         btEstoqueRemoverProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -156,86 +168,81 @@ public class TelaEstoque extends javax.swing.JFrame {
 
         btEstoqueBuscar.setText("Buscar");
 
+        jLabel13.setText("Categoria");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btEstoqueCriarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btEstoqueAtualizarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btEstoqueRemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addGap(77, 77, 77)
-                                                            .addComponent(jLabel1)
-                                                            .addGap(34, 34, 34))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(inpEstoqueNomeProduto)
-                                                        .addComponent(inpEstoqueValorUni)
-                                                        .addComponent(inpEstoqueQntDisponivel)))
-                                                .addComponent(jLabel5)
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel7)
-                                                .addComponent(jLabel8)
-                                                .addComponent(jLabel10)
-                                                .addComponent(jLabel12)
-                                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(inpEstoqueBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btEstoqueBuscar)))
-                                        .addGap(0, 12, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jSeparator1)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btEstoqueCriarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEstoqueAtualizarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEstoqueRemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(253, 253, 253)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(inpEstoqueQntDisponivel)
+                                        .addComponent(inpEstoqueNomeProduto)
+                                        .addComponent(inpEstoqueValorUni)
+                                        .addComponent(inpEstoqueCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inpEstoqueBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btEstoqueBuscar)))
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addComponent(jSeparator1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(245, 245, 245)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(288, 288, 288)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel4)
-                .addGap(30, 30, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inpEstoqueBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btEstoqueBuscar))
@@ -249,11 +256,15 @@ public class TelaEstoque extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
-                        .addGap(24, 24, 24)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inpEstoqueNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inpEstoqueCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(inpEstoqueValorUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -261,12 +272,13 @@ public class TelaEstoque extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inpEstoqueQntDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(53, 53, 53)
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btEstoqueCriarProduto)
                             .addComponent(btEstoqueAtualizarProduto)
-                            .addComponent(btEstoqueRemoverProduto))
-                        .addGap(68, 68, 68))))
+                            .addComponent(btEstoqueRemoverProduto)
+                            .addComponent(btEstoqueCriarProduto))
+                        .addGap(35, 35, 35))
+                    .addComponent(jScrollPane1)))
         );
 
         pack();
@@ -278,11 +290,81 @@ public class TelaEstoque extends javax.swing.JFrame {
 
     private void btEstoqueCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstoqueCriarProdutoActionPerformed
         // TODO add your handling code here:
+        try{
+            boolean erro = false;
+            // Verificar se todos os campos foram preenchidos
+            if(inpEstoqueNomeProduto.getText().isEmpty() ||
+               inpEstoqueValorUni.getText().isEmpty() ||
+               inpEstoqueQntDisponivel.getText().isEmpty() ||
+               inpEstoqueCategoria.getText().isEmpty()){
+                erro = true;
+            }
+            // Obter valores preenchidos em cada campo
+            String nome = inpEstoqueNomeProduto.getText();
+            float valorUni = Float.parseFloat(inpEstoqueValorUni.getText());
+            int qntDisponivel = Integer.parseInt(inpEstoqueQntDisponivel.getText());
+            String categoriaNome = inpEstoqueCategoria.getText();
+            int usuarioID = GerenciaTelas.getUsuarioLogado().getUsuarioID();
+            // Prosseguir com o registro do produto (e da categoria se necessário)
+            if(!erro){
+                if(!GerenciaTelas.categoriaControle.categoriaRegistrada(categoriaNome)){
+                    GerenciaTelas.categoriaControle.registrar(categoriaNome);
+                }
+                GerenciaTelas.produtoControle.registrar(nome, valorUni, qntDisponivel, usuarioID, categoriaNome);
+                atualizarTabela();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btEstoqueCriarProdutoActionPerformed
 
     private void btEstoqueRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstoqueRemoverProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btEstoqueRemoverProdutoActionPerformed
+
+    private void btEstoqueAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstoqueAtualizarProdutoActionPerformed
+        // TODO add your handling code here:
+        try{
+            boolean erro = false;
+            // Verificar se todos os campos foram preenchidos
+            if(inpEstoqueNomeProduto.getText().isEmpty() ||
+               inpEstoqueValorUni.getText().isEmpty() ||
+               inpEstoqueQntDisponivel.getText().isEmpty() ||
+               inpEstoqueCategoria.getText().isEmpty()){
+                erro = true;
+            }
+            // Obter valores preenchidos em cada campo
+            String nome = inpEstoqueNomeProduto.getText();
+            float valorUni = Float.parseFloat(inpEstoqueValorUni.getText());
+            int qntDisponivel = Integer.parseInt(inpEstoqueQntDisponivel.getText());
+            String categoriaNome = inpEstoqueCategoria.getText();
+            int usuarioID = GerenciaTelas.getUsuarioLogado().getUsuarioID();
+            // Prosseguir com o registro do produto (e da categoria se necessário)
+            if(!erro){
+                if(!GerenciaTelas.categoriaControle.categoriaRegistrada(categoriaNome)){
+                    GerenciaTelas.categoriaControle.registrar(categoriaNome);
+                }
+                GerenciaTelas.produtoControle.registrar(nome, valorUni, qntDisponivel, usuarioID, categoriaNome);
+                atualizarTabela();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btEstoqueAtualizarProdutoActionPerformed
+
+    private void tabEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabEstoqueMouseClicked
+        // TODO add your handling code here:
+        int linha = tabela.getSelectedRow();
+        if (linha != -1) {
+            idSelecionado = (int) tbListar.getValueAt(linha, 0); // Coluna ID
+            String nome = (String) tbListar.getValueAt(linha, 1);
+            int idade = (int) tbListar.getValueAt(linha, 2);
+
+            txtNome.setText(nome);
+            txtIdade.setText(String.valueOf(idade));
+    }//GEN-LAST:event_tabEstoqueMouseClicked
 
     /**
      * @param args the command line arguments
@@ -325,6 +407,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btEstoqueCriarProduto;
     private javax.swing.JButton btEstoqueRemoverProduto;
     private javax.swing.JTextField inpEstoqueBuscar;
+    private javax.swing.JTextField inpEstoqueCategoria;
     private javax.swing.JTextField inpEstoqueNomeProduto;
     private javax.swing.JTextField inpEstoqueQntDisponivel;
     private javax.swing.JTextField inpEstoqueValorUni;
@@ -332,6 +415,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

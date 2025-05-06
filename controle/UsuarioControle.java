@@ -39,6 +39,10 @@ public class UsuarioControle {
         return dao.emailRegistrado(email);
     }
     
+    public Usuario obterUsuarioPorLogin(String email, String senha){
+        return dao.obterUsuarioPorLogin(email, senha);
+    }
+    
     public boolean autenticar(String email, String senha){
         return dao.autenticar(email,senha);
     }

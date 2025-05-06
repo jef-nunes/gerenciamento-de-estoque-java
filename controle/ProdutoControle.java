@@ -21,8 +21,16 @@ public class ProdutoControle {
         dao.inserir(p,nomeCategoria,usuarioID);
     }
     
+    public ArrayList<Produto> buscaPorNomeProduto(String nome){
+        return dao.buscaPorNomeProduto(nome);
+    }
+    
+    public ArrayList<Produto> buscaPorNomeResponsavel(String nome){
+        return dao.buscaPorNomeResponsavel(nome);
+    }
+    
     public String obterNomeResponsavel(int usuarioID){
-        return dao.obterNomeUsuario(0);
+        return dao.obterNomeUsuario(usuarioID);
     }
     
     public ArrayList<Produto> listar(){

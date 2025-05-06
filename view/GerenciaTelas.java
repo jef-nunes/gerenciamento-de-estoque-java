@@ -12,13 +12,24 @@ import modelo.Usuario;
  * @author jefadmin
  */
 public class GerenciaTelas {
-    public static Usuario usuarioLogado;
+    private static Usuario usuarioLogado;
     public static UsuarioControle usuarioControle = new UsuarioControle();
     public static CategoriaControle categoriaControle = new CategoriaControle();
     public static ProdutoControle produtoControle = new ProdutoControle();
     public static TelaLogin telaLogin;
     public static TelaSignup telaSignup;
     public static TelaEstoque telaEstoque;
+
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public static void setUsuarioLogado(Usuario usuarioLogado) {
+        GerenciaTelas.usuarioLogado = usuarioLogado;
+    }
+    
+    
+    
     // Renderiza apenas a tela especificada
     public static void definirTelaAtual(String nomeTela){
         switch(nomeTela){

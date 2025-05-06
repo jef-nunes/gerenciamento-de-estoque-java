@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 import principal.Principal;
 
 /**
@@ -81,9 +82,6 @@ public class TelaLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -107,8 +105,13 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(110, 110, 110))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(110, 110, 110))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,19 +151,23 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btLoginEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginEnviarActionPerformed
         // TODO add your handling code here:
         String email = inpLoginEmail.getText().trim();
-        String senha = new String(inpLoginSenha.getPassword());
-        if(email.isEmpty() || senha.isEmpty()){
+        String _senha = new String(inpLoginSenha.getPassword());
+        if(email.isEmpty() || _senha.isEmpty()){
             JOptionPane.showMessageDialog(null, "Erro - Preencha todos os campos.");
         }
         else{
-            String hash = GerenciaTelas.usuarioControle.criptografarSenha(senha);
+            String hash = GerenciaTelas.usuarioControle.criptografarSenha(_senha);
             boolean autenticar = GerenciaTelas.usuarioControle.autenticar(email,hash);
-            if(!autenticar){
-               JOptionPane.showMessageDialog(null, "Erro - Credenciais de acesso inválidas.");
-            }
-            else{
+            if(autenticar){
+                Usuario usuarioLogado = GerenciaTelas.usuarioControle.obterUsuarioPorLogin(email, hash);
+                GerenciaTelas.setUsuarioLogado(usuarioLogado);
+                System.out.println("[Usuário logado]");
+                GerenciaTelas.getUsuarioLogado().exibirDados();
                  JOptionPane.showMessageDialog(null, "Bem vindo!");
                  GerenciaTelas.definirTelaAtual("estoque");
+            }
+            else{
+              JOptionPane.showMessageDialog(null, "Erro - Credenciais de acesso inválidas.");
             }
             
         }

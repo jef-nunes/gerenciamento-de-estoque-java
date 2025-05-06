@@ -18,15 +18,44 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO {
     
-    // Autenticar um usuario
-    public boolean autenticar(String email, String senha) {
-        String sql = "SELECT 1 FROM usuario WHERE email = ? AND senha = ? LIMIT 1";
+    // Retornar um usuario a partir das credenciais de login
+    public Usuario obterUsuarioPorLogin(String email, String senha){
+        Usuario u;
+        String sql = "SELECT * FROM usuario WHERE email= ? AND senha = ?;";
         try (Connection con = ConexaoMySQL.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
-            return rs.next(); // true se encontrou um usuário com email e senha
+            if(rs.next()){
+                u = new Usuario(
+                        rs.getInt("usuario_id"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("nome")
+                );
+                return u;
+            }
+            else{
+                u = new Usuario(-1,"?","?","?");
+                return u;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            u = new Usuario(-1,"?","?","?");
+            return u;
+        }
+    }
+    
+    // Autenticar um usuario
+    public boolean autenticar(String email, String senha) {
+        String sql = "SELECT 1 FROM usuario WHERE email = ? AND senha = ? LIMIT 1;";
+        try (Connection con = ConexaoMySQL.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -37,7 +66,7 @@ public class UsuarioDAO {
     // Verificar se um email de login
     // já está registrado no banco de dados
     public boolean emailRegistrado(String email) {
-        String sql = "SELECT 1 FROM usuario WHERE email = ? LIMIT 1";
+        String sql = "SELECT 1 FROM usuario WHERE email = ? LIMIT 1;";
         try (Connection con = ConexaoMySQL.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, email);
@@ -53,7 +82,7 @@ public class UsuarioDAO {
     
     public void inserir(Usuario usuario){
         String sql = "INSERT INTO usuario(email, senha, nome)"+
-                      "VALUES (?,?,?)";
+                      "VALUES (?,?,?);";
         try (Connection con = ConexaoMySQL.conectar()) {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, usuario.getEmail());
@@ -88,7 +117,7 @@ public class UsuarioDAO {
     }
     
     public void remover(int id) {
-        String sql = "DELETE FROM usuario WHERE id = ?";
+        String sql = "DELETE FROM usuario WHERE id = ?;";
         try (Connection con = ConexaoMySQL.conectar()) {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -102,7 +131,7 @@ public class UsuarioDAO {
     
     public ArrayList<Usuario> listar() {
         ArrayList<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuario;";
         try (Connection con = ConexaoMySQL.conectar();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
