@@ -22,17 +22,6 @@ import view.GerenciaTelas;
  * @author jefadmin
  */
 public class Principal {
-    // Acesso ao MySQL em ambiente de desenvolvimento
-    private static void acessoMySQLDev(){
-        try {
-            // Salvo em ~/.profile
-            String senha = System.getenv("MYSQL_PW");
-            ConexaoMySQL.setPasswordDev(senha);
-        }
-        catch (Exception e) {
-           e.printStackTrace();
-        }
-     }
     
     // Testes em desenvolvimento
     private static void testes(){
@@ -54,9 +43,6 @@ public class Principal {
             if(arg.equalsIgnoreCase("--dev")){
                 System.out.println("[Ambiente de Desenvolvimento]");
                 Variaveis.setDev(true);
-                // Prepara acesso ao MySQL
-                // em abiente de desenvolvimento
-                acessoMySQLDev();
             }
         }
         // Prepara o banco de dados
