@@ -34,24 +34,11 @@ public class ConexaoMySQL {
     private static final String URL_DEV = "jdbc:mysql://localhost:3306/"+NOME_BANCO+"?verifyServerCertificate=false&useSSL=true";
     private static final String URL_SEM_BANCO_DEV = "jdbc:mysql://localhost:3306/"+"?verifyServerCertificate=false&useSSL=true";
 
-    public static String getPasswordDev() {
-        return passwordDev;
-    }
-
-    public static void setPasswordDev(String passwordDev) {
-        ConexaoMySQL.passwordDev = passwordDev;
-    }
     
     public static Connection conectar(){
         contador+=1;
         try{
-             if(Variaveis.isDev()){
-             //System.out.println("(Conexão ao banco de dados em ambiente de desenvolvimento)"+"("+contador+")");
-             return DriverManager.getConnection(URL_DEV, USERNAME, passwordDev);
-            }
-            else{
              return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            }
         } catch (SQLException e){
             throw new RuntimeException("Erro na conexão com o banco de dados: "+e.getMessage());
         }
@@ -60,13 +47,7 @@ public class ConexaoMySQL {
     public static Connection conectarSemBanco(){
         contador+=1;
         try{
-            if(Variaveis.isDev()){
-             //System.out.println("(Conexão ao MySQL em ambiente de desenvolvimento)"+"("+contador+")");
-             return DriverManager.getConnection(URL_SEM_BANCO_DEV, USERNAME, passwordDev);
-            }
-            else{
              return DriverManager.getConnection(URL_SEM_BANCO, USERNAME, PASSWORD);
-            }
         } catch (SQLException e){
             throw new RuntimeException("Erro na conexão com o MySQL: "+e.getMessage());
         }
